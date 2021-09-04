@@ -67,6 +67,6 @@ def organize(dist_folder):
     os.chdir(dist_folder)
 
     log.info('Organizing files in assets folder')
-    input(
-        'Organizer will run in ['+ os.getcwd() +'] Are you sure you are in a correct directory  ? \n Press [ENTER] to confirm or Ctrl + C to quit')
+    # input(
+    # 'Organizer will run in ['+ os.getcwd() +'] Are you sure you are in a correct directory  ? \n Press [ENTER] to confirm or Ctrl + C to quit')
     main()

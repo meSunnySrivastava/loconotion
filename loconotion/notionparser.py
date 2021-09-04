@@ -267,8 +267,8 @@ class Parser:
 
         # light theme is on by default
         # enable dark mode based on https://fruitionsite.com/ dark mode hack
-        if self.config.get('theme') == 'dark':
-            self.driver.execute_script("__console.environment.ThemeStore.setState({ mode: 'dark' });")
+        #if self.config.get('theme') == 'dark':
+        self.driver.execute_script("__console.environment.ThemeStore.setState({ mode: 'dark' });")
 
         # scroll at the bottom of the notion-scroller element to load all elements
         # continue once there are no changes in height after a timeout
