@@ -574,8 +574,14 @@ class Parser:
         )
         soup.body.insert(-1, custom_script)
 
-        hrefDomain = url.split('notion.site')[0] + 'notion.site'
-        log.info(f"Got the domain as {hrefDomain}")
+        hrefDomain = url
+        newFormatDomain = False
+        if 'notion.site' in url:
+            hrefDomain = url.split('notion.site')[0] + 'notion.site'
+            newFormatDomain = True
+        else:
+            hrefDomain = "https://www.notion.so"
+        log.info(f"Got Domain as {hrefDomain}")
 
         # find sub-pages and clean slugs / links
         sub_pages = []
@@ -583,8 +589,11 @@ class Parser:
         for a in soup.find_all('a', href=True):
             sub_page_href = a["href"]
             if sub_page_href.startswith("/"):
-                sub_page_href = hrefDomain + '/'+ a["href"].split('/')[len(a["href"].split('/'))-1]
-                log.info(f"Got this as href {sub_page_href}")
+                if newFormatDomain:
+                    sub_page_href = hrefDomain + '/'+ a["href"].split('/')[len(a["href"].split('/'))-1]
+                else:
+                    sub_page_href = "https://www.notion.so" + a["href"]
+                log.info(f"Got sub page href {sub_page_href}")
             if sub_page_href.startswith(hrefDomain):
                 if parse_links or not len(a.find_parents("div", class_="notion-scroller")):
                     # if the link is an anchor link,
